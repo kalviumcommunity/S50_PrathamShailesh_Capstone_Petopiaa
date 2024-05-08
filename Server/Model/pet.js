@@ -1,53 +1,51 @@
-const mongoose=require("mongoose")
+const mongoose = require("mongoose");
 
-let petschema= new mongoose.Schema({
-    name: {
-        type: "string",
-        required: true,
-      },
-      species: {
-        type: "string",
-        required: true,
-      },
-      breed: {
-        type: "string",
-        required: true,
-      },
-      age: {
-        type: "number",
-        required: true,
-        min: 1,
-        max: 9,
-      },
-      gender: {
-        type: "string",
-        required: true,
-      },
-      color: {
-        type: "string",
-        required: true,
-      },
-      image: {
-        type: "string",
-        required: true,
-      },
-      price: {
-        type: "number",
-        required: true,
-      },
-      description: {
-        type: "string",
-        required: true,
-      },
-        userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-      }
-})
+let petschema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  species: {
+    type: String,
+    required: true,
+  },
+  breed: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 9,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
+  color: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
+});
 
 const petModel = mongoose.model("Pet_detail", petschema);
 
-module.exports=petModel;
-
-  
+module.exports = petModel;
