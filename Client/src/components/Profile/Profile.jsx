@@ -1,6 +1,6 @@
-import NavMainpage from "../Mainpage/Nav-Mainpage";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import NavMainpage from "../Mainpage/Nav-Mainpage";
 
 function Profile() {
   const [username, setUsername] = useState("");

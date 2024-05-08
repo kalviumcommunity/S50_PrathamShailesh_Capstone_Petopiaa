@@ -1,9 +1,9 @@
-import logo from "../../assets/Frame_1__4_-removebg-preview.png";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Tablist, Tab, Pane, Paragraph } from "evergreen-ui";
-import React, { useState } from "react";
+import { Tab, Tablist } from "evergreen-ui";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/Frame_1__4_-removebg-preview.png";
 
 function NavMainpage() {
   const [showSetting, setSetting] = useState(false);

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
-import signupimg from "../../assets/signUp.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { GoogleLogin } from "react-google-login";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import signupimg from "../../assets/signUp.png";
 
 function SignUp() {
   const [formData, setFormData] = useState({
