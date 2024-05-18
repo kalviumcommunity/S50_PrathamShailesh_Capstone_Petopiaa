@@ -14,7 +14,6 @@ function SignUp() {
   const [isGoogleSigning, setIsGoogleSigning] = useState(false);
   const navigate  = useNavigate();
 
-  useEffect(() => {}, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,26 +36,29 @@ function SignUp() {
       return;
     }
 
+    console.log(formData)
+
     try {
       const response = await axios.post(
-        "http://localhost:3000/users/signup",
-        formData
+          "http://localhost:3000/users/signup",
+          formData
       );
-      
+  
       const { user, token } = response.data;
       localStorage.setItem("token", token);
       console.log("Form submitted successfully:", response.data);
-      localStorage.setItem("isFirstTimeUser",true)
-      navigate("/MainPage")
-    } catch (error) {
-      if (error.response && error.response.status === 400 && error.response.data && error.response.data.message === "Email already exists") {
-        console.error("Email already exists:", error.response.data.message);
-        setErrorMessage("Email already exists. Please use a different email address.");
+      localStorage.setItem("isFirstTimeUser", true);
+      navigate("/MainPage");
+  } catch (error) {
+      if (error.response && error.response.status === 400) {
+          const errorMessage = error.response.data.message || "An error occurred. Please try again later.";
+          setErrorMessage(errorMessage);
       } else {
-        console.error("Error submitting form:", error);
-        setErrorMessage("An error occurred. Please try again later.");
+          console.error("Error submitting form:", error);
+          setErrorMessage("An error occurred. Please try again later.");
       }
-    }
+  }
+  
   };
 
   const googleclck = () => {
