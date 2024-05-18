@@ -2,7 +2,7 @@ import NavMainpage from "../Mainpage/Nav-Mainpage";
 import { Button, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { FiSearch, FiSend } from "react-icons/fi";
 import io from "socket.io-client";
 import { useLocation } from "react-router-dom"; 
@@ -17,6 +17,12 @@ function ChatBox() {
 
   const location = useLocation();
   const socket = useMemo(() => io("http://localhost:4000"), []);
+
+  const scrollToBottom = useCallback(() => {
+    if (innerDivRef.current) {
+      innerDivRef.current.scrollTop = innerDivRef.current.scrollHeight;
+    }
+  }, []);
 
   useEffect(() => {
     const fetchChatMessages = async () => {
@@ -60,13 +66,15 @@ function ChatBox() {
 
           return updatedConversations;
         });
+
+        scrollToBottom();
       }
     });
 
     return () => {
       socket.off("receiveMessage");
     };
-  }, [socket, conversations]);
+  }, [socket, conversations, scrollToBottom]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -152,11 +160,9 @@ function ChatBox() {
     }
   };
 
-  const scrollToBottom = () => {
-    if (innerDivRef.current) {
-      innerDivRef.current.scrollTop = innerDivRef.current.scrollHeight;
-    }
-  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [selectedChat, conversations, scrollToBottom]);
 
   const renderMessages = () => {
     if (selectedChat && currentUser) {
