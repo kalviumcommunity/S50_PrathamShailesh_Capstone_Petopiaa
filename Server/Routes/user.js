@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userModel = require('../Model/user');
 const authenticateToken = require('./authenticateToken');
+const usermodel = require('../Model/user');
 require('dotenv').config();
 
 const router = express.Router();
@@ -20,7 +21,7 @@ router.post('/signup', async (req, res, next) => {
 
       const newUser = await userModel.create({ User_Name, Email, Password: hashedPassword });
 
-      const token = jwt.sign({ userId: newUser._id, username: newUser.User_Name, email: newUser.Email }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: newUser._id, username: newUser.User_Name, email: newUser.Email }, process.env.JWT_SECRET_KEY, { expiresIn: '8h' });
 
       res.status(201).json({ user: newUser, token });
   } catch (error) {
@@ -63,6 +64,21 @@ router.get("/", authenticateToken, async (req, res, next) => {
         res.json(user);
     } catch (error) {
         next(error);
+    }
+});
+
+router.get("/seller/:id", async (req, res) => { // Use req.params to access route parameters
+    const id = req.params.id;
+
+    try {
+        const detail = await usermodel.findById(id);
+        if (!detail) {
+            return res.status(404).json({ error: 'Seller not found' });
+        }
+        res.json(detail);
+    } catch (error) {
+        console.error('Error fetching seller details:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 

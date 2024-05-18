@@ -4,6 +4,7 @@ const cors = require('cors');
 const userroute=require('./Routes/user')
 const authroute=require('./Routes/auth')
 const petroute=require("./Routes/pet")
+const chat=require("./Routes/chat")
 const connectDatabase = require('./Config/Database');
 const passport = require("passport");
 const session = require('express-session');
@@ -34,6 +35,7 @@ app.use(express.json());
 app.use('/users',userroute)
 app.use('/rehome',petroute)
 app.use("/auth",authroute)
+app.use("/chat",chat)
 
 
 app.listen(port, () => {

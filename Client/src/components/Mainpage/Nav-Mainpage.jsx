@@ -11,7 +11,7 @@ function NavMainpage() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
-  const tabs = ["Home", "Rehome a Pet", "About", "Contact"];
+  const tabs = ["Home", "Rehome a Pet","Chat", "About", "Contact"];
 
   const handleTabSelect = (index) => {
     setSelectedIndex(index);
@@ -21,6 +21,9 @@ function NavMainpage() {
         break;
       case 1:
         navigate("/Rehome");
+        break;
+      case 2:
+        navigate("/chat");
         break;
       
       default:
@@ -43,6 +46,10 @@ function NavMainpage() {
   const profile = () => {
     navigate("/Profile");
   };
+
+  const chat=()=>{
+    navigate("/chat");
+  }
 
   return (
     <>
@@ -151,6 +158,13 @@ function NavMainpage() {
               onClick={rehome}
             >
               Rehome a Pet
+            </a>
+            <a
+              href="#"
+              className="block text-gray-600 hover:text-gray-800 py-2"
+              onClick={chat}
+            >
+              Chat
             </a>
             <a
               href="#"

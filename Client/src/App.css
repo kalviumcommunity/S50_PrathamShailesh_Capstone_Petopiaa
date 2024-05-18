@@ -12,6 +12,10 @@
     height: 100%;
   }
 
+  ::-webkit-scrollbar{
+    width: 0;
+  }
+
 
   .mainpage-bg{
     /* background: url('./assets/bg-image.jpg'); */
