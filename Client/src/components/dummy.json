@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "name": "Buddy",
+      "species": "Dog",
+      "breed": "Labrador Retriever",
+      "age": 3,
+      "gender": "Male",
+      "color": "Golden",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Buddy is a friendly and energetic Labrador Retriever. He loves to play fetch and go for long walks."
+    },
+    {
+      "id": 2,
+      "name": "Whiskers",
+      "species": "Cat",
+      "breed": "Maine Coon",
+      "age": 2,
+      "gender": "Female",
+      "color": "Brown Tabby",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Whiskers is a beautiful Maine Coon with a playful personality. She enjoys chasing toys and lounging in sunny spots."
+    },
+    {
+      "id": 3,
+      "name": "Rocky",
+      "species": "Dog",
+      "breed": "German Shepherd",
+      "age": 4,
+      "gender": "Male",
+      "color": "Black and Tan",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Rocky is a loyal and intelligent German Shepherd. He is great with kids and loves to go hiking."
+    },
+    {
+      "id": 4,
+      "name": "Fluffy",
+      "species": "Cat",
+      "breed": "Persian",
+      "age": 5,
+      "gender": "Male",
+      "color": "White",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Fluffy is a calm and affectionate Persian cat. He enjoys lounging on laps and being brushed."
+    },
+    {
+      "id": 5,
+      "name": "Luna",
+      "species": "Dog",
+      "breed": "Siberian Husky",
+      "age": 2,
+      "gender": "Female",
+      "color": "Black and White",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Luna is a playful and adventurous Siberian Husky. She loves running and exploring new places."
+    },
+    {
+      "id": 6,
+      "name": "Milo",
+      "species": "Cat",
+      "breed": "Siamese",
+      "age": 1,
+      "gender": "Male",
+      "color": "Seal Point",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Milo is a vocal and affectionate Siamese cat. He enjoys being the center of attention and playing with toys."
+    },
+    {
+      "id": 7,
+      "name": "Daisy",
+      "species": "Dog",
+      "breed": "Golden Retriever",
+      "age": 6,
+      "gender": "Female",
+      "color": "Golden",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Daisy is a gentle and loyal Golden Retriever. She loves swimming and spending time with her family."
+    },
+    {
+      "id": 8,
+      "name": "Oliver",
+      "species": "Cat",
+      "breed": "British Shorthair",
+      "age": 3,
+      "gender": "Male",
+      "color": "Blue",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Oliver is a laid-back and independent British Shorthair cat. He enjoys napping in sunny spots and exploring the backyard."
+    },
+    {
+      "id": 9,
+      "name": "Max",
+      "species": "Dog",
+      "breed": "Boxer",
+      "age": 4,
+      "gender": "Male",
+      "color": "Brindle",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Max is an energetic and friendly Boxer. He loves playing with toys and going for runs in the park."
+    },
+    {
+      "id": 10,
+      "name": "Lola",
+      "species": "Dog",
+      "breed": "Poodle",
+      "age": 2,
+      "gender": "Female",
+      "color": "Apricot",
+      "image": "https://wallpapers.com/images/featured/baby-animals-wmsvikfmzvhh3aot.jpg",
+      "price":"20",
+      "description": "Lola is a smart and playful Poodle. She enjoys learning new tricks and going for walks in the neighborhood."
+    }
+  ]
+  
