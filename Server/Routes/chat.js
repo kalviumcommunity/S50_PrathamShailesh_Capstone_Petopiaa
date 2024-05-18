@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const Conversation = require("../Model/chat");
 
 router.post("/", async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { participants, messages } = req.body;
 
@@ -13,9 +16,11 @@ router.post("/", async (req, res) => {
         { participants: sortedParticipants },
         { participants: sortedParticipants.reverse() },
       ],
-    });
+    }).session(session);
 
     if (existingConversation) {
+      await session.commitTransaction();
+      session.endSession();
       return res.status(200).json(existingConversation);
     }
 
@@ -24,37 +29,44 @@ router.post("/", async (req, res) => {
       messages: messages || [],
     });
 
-    await conversation.save();
+    await conversation.save({ session });
 
+    await session.commitTransaction();
+    session.endSession();
     return res.status(201).json(conversation);
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
     console.error("Error creating conversation:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
 router.put("/", async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { participants, messages } = req.body;
 
-    // Find the conversation by its participants
     const conversation = await Conversation.findOne({
       participants: { $all: participants },
-    });
+    }).session(session);
     if (!conversation) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ error: "Conversation not found" });
     }
 
-    // Update the messages field of the conversation
     conversation.messages = messages;
 
-    // Save the updated conversation to the database
-    await conversation.save();
+    await conversation.save({ session });
 
-    // Return success response with the updated conversation
+    await session.commitTransaction();
+    session.endSession();
     return res.status(200).json(conversation);
   } catch (error) {
-    // Handle errors
+    await session.abortTransaction();
+    session.endSession();
     console.error("Error updating conversation messages:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
@@ -62,12 +74,9 @@ router.put("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    // Retrieve all conversations from the database
     const conversations = await Conversation.find();
-    // Return the conversations as a JSON response
     return res.status(200).json(conversations);
   } catch (error) {
-    // Handle errors
     console.error("Error retrieving conversations:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
