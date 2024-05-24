@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const Joi = require('joi'); 
 const userModel = require('../Model/user');
 const authenticateToken = require('./authenticateToken');
-const usermodel = require('../Model/user');
 require('dotenv').config();
 
 const router = express.Router();
@@ -73,6 +72,20 @@ router.post('/login', async (req, res, next) => {
         const token = jwt.sign({ userId: user._id, email: user.Email }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
         res.json({ user, token });
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get("/", authenticateToken, async (req, res, next) => {
+    try {
+        const userId = req.user.userId;
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json(user);
     } catch (error) {
         next(error);
     }
