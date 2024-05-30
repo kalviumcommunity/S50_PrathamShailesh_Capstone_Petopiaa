@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="flex flex-col md:flex-row justify-between items-center p-3 md:p-5 "> 
       <div className="mb-4 md:mb-0">
-        <img src={logo} alt="" className="h-20 " />
+        <img src={logo} alt="" className="h-16 " />
         {/* <h1 className="logo text-4xl font-bold">  
           <span className="text-pink-600">P</span>ETOPIA
         </h1> */}
