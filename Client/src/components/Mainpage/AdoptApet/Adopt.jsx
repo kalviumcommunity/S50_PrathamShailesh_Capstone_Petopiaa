@@ -8,10 +8,12 @@ const PetDetailsPopup = ({ pet, onClose }) => {
   const [user, setUser] = useState("");
   const sellerId = pet.userId;
 
+
   useEffect(() => {
     const fetchSellerName = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/users/seller/${sellerId}`);
+        // console.log(response)
         setSellerName(response.data.User_Name); 
       } catch (error) {
         console.error('Error fetching seller name:', error);
