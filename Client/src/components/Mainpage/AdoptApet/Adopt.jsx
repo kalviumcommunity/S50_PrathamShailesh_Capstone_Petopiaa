@@ -7,12 +7,17 @@ const PetDetailsPopup = ({ pet, onClose }) => {
   const [sellerName, setSellerName] = useState('');
   const [user, setUser] = useState("");
   const sellerId = pet.userId;
+  const token = localStorage.getItem("token");
 
 
   useEffect(() => {
     const fetchSellerName = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/users/seller/${sellerId}`);
+        const response = await axios.get(`http://localhost:3000/users/seller/${sellerId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         // console.log(response)
         setSellerName(response.data.User_Name); 
       } catch (error) {
@@ -22,14 +27,16 @@ const PetDetailsPopup = ({ pet, onClose }) => {
 
     const fetchUsername = async () => {
       try {
-        const token = localStorage.getItem("token");
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const response = await axios.get("http://localhost:3000/users", {
+        const response = await axios.post("http://localhost:3000/chat", {
+          participants: [user, sellerName],
+          messages: []
+        }, {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            'Authorization': `Bearer ${token}` 
+          }
         });
         setUser(response.data.User_Name);
       } catch (error) {
@@ -47,6 +54,10 @@ const PetDetailsPopup = ({ pet, onClose }) => {
         const response = await axios.post("http://localhost:3000/chat", {
           participants: [user, sellerName],
           messages: []
+        }, {
+          headers: {
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
+          }
         });
         console.log(response.data);
         // Navigate to the chat page with the seller's ID as a query parameter

@@ -6,6 +6,7 @@ const authroute=require('./Routes/auth')
 const petroute=require("./Routes/pet")
 const chat=require("./Routes/chat")
 const connectDatabase = require('./Config/Database');
+const authenticateToken=require("./Routes/authenticateToken")
 const passport = require("passport");
 const session = require('express-session');
 require('dotenv').config();
@@ -35,9 +36,9 @@ app.use(express.json());
 
 
 app.use('/users',userroute)
-app.use('/rehome',petroute)
-app.use("/auth",authroute)
-app.use("/chat",chat)
+app.use('/rehome',authenticateToken,petroute)
+app.use("/auth",authenticateToken,authroute)
+app.use("/chat",authenticateToken,chat)
 
 
 app.listen(port, () => {

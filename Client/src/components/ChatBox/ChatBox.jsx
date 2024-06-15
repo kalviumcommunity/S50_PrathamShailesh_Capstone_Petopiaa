@@ -14,6 +14,7 @@ function ChatBox() {
   const [conversations, setConversations] = useState([]);
   const [user, setUser] = useState("");
   const [roomId, setRoomId] = useState("");
+  const token = localStorage.getItem("token");
 
   const location = useLocation();
   const socket = useMemo(() => io("http://localhost:4000"), []);
@@ -27,7 +28,11 @@ function ChatBox() {
   useEffect(() => {
     const fetchChatMessages = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/chat");
+        const response = await axios.get("http://localhost:3000/chat",{
+          headers:{
+            'Authorization':`Bearer ${token}`
+          }
+        });
         setConversations(response.data);
       } catch (error) {
         console.error("Error fetching chat messages:", error);
@@ -79,7 +84,7 @@ function ChatBox() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        
         if (!token) {
           throw new Error("User not authenticated");
         }
@@ -151,6 +156,10 @@ function ChatBox() {
               conv.participants.includes(selectedChat) &&
               conv.participants.includes(currentUser)
           ).messages,
+        }, {
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
         });
       } catch (error) {
         console.error("Error updating message in the database:", error);

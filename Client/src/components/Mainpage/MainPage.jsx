@@ -23,6 +23,7 @@ const Main = ({ user }) => {
 
   useEffect(() => {
     const isFirstTime = localStorage.getItem("isFirstTimeUser");
+    const token = localStorage.getItem('token');
 
     if (isFirstTime === "false") {
       setIsShown(true);
@@ -39,7 +40,11 @@ const Main = ({ user }) => {
         setLoading(true);
         const response = await axios.get("http://localhost:3000/rehome", {
           params: { filter },
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
         });
+        
         setPets(response.data);
       } catch (error) {
         console.error("Error fetching pets:", error);
