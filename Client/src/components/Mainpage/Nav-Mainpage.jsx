@@ -1,17 +1,18 @@
+import logo from "../../assets/Frame_1__4_-removebg-preview.png";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Tab, Tablist } from "evergreen-ui";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/Frame_1__4_-removebg-preview.png";
 
 function NavMainpage() {
   const [showSetting, setSetting] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const navigate = useNavigate();
 
-  const tabs = ["Home", "Rehome a Pet","Chat", "About", "Contact"];
+  const tabs = ["Home", "Rehome a Pet", "Chat", "About", "Contact"];
 
   const handleTabSelect = (index) => {
     setSelectedIndex(index);
@@ -25,7 +26,7 @@ function NavMainpage() {
       case 2:
         navigate("/chat");
         break;
-      
+
       default:
         break;
     }
@@ -47,9 +48,29 @@ function NavMainpage() {
     navigate("/Profile");
   };
 
-  const chat=()=>{
+  const chat = () => {
     navigate("/chat");
-  }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  const confirmLogout = () => {
+    setSetting(!showSetting);
+
+    setShowLogoutPopup(true);
+  };
+
+  const handleCancelLogout = () => {
+    setShowLogoutPopup(false);
+  };
+
+  const handleConfirmLogout = () => {
+    logout();
+    setShowLogoutPopup(false);
+  };
 
   return (
     <>
@@ -125,6 +146,7 @@ function NavMainpage() {
                       <a
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={confirmLogout}
                       >
                         Logout
                       </a>
@@ -178,6 +200,27 @@ function NavMainpage() {
             >
               Contact
             </a>
+          </div>
+        </div>
+      )}
+      {showLogoutPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl mb-4">Are you sure you want to logout?</h2>
+            <div className="flex justify-center space-x-4">
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={handleCancelLogout}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={handleConfirmLogout}
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       )}
