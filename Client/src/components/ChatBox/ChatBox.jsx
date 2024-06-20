@@ -28,7 +28,7 @@ function ChatBox() {
   useEffect(() => {
     const fetchChatMessages = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/chat",{
+        const response = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/chat",{
           headers:{
             'Authorization':`Bearer ${token}`
           }
