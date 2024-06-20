@@ -40,7 +40,7 @@ function SignUp() {
 
     try {
       const response = await axios.post(
-          "http://localhost:3000/users/signup",
+          "https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users/signup",
           formData
       );
   
