@@ -38,7 +38,10 @@ router.post('/signup', async (req, res, next) => {
 
         const newUser = await userModel.create({ User_Name, Email, Password: hashedPassword });
 
-        const token = jwt.sign({ userId: newUser._id, username: newUser.User_Name, email: newUser.Email }, process.env.JWT_SECRET_KEY, { expiresIn: '8h' });
+        const token = jwt.sign({ userId: newUser._id,
+             username: newUser.User_Name,
+              email: newUser.Email }, 
+             process.env.JWT_SECRET_KEY, { expiresIn: '8h' });
 
         res.status(201).json({ user: newUser, token });
     } catch (error) {
@@ -81,6 +84,20 @@ router.get("/", authenticateToken, async (req, res, next) => {
     try {
         const userId = req.user.userId;
         const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get("/seller/:id", authenticateToken, async (req, res, next) => {
+    try {
+        const sellerId = req.params.id; // Use the seller ID from the URL parameter
+        const user = await userModel.findById(sellerId); // Find the seller by the seller ID
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }

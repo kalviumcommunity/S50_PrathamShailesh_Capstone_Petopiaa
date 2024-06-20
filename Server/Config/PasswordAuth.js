@@ -9,6 +9,7 @@ const CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 
+
 passport.use(new GoogleStrategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
@@ -21,7 +22,7 @@ passport.use(new GoogleStrategy({
     // console.log("hello")
     try {
         let user = await User.findOne({ google_id: profile.id });
-        // console.log(profile.picture)
+        // console.log(profile)
         if (!user) {
             user = new User({
                 google_id: profile.id, 
@@ -32,18 +33,17 @@ passport.use(new GoogleStrategy({
             await user.save();
         }
         const token = jwt.sign(
-            { userId: user._id, email: user.Email }, 
+            { userId: user._id,
+                 email: user.Email }, 
             process.env.Jwt_Secret_key, 
-            { expiresIn: '1h' } 
+            { expiresIn: '8h' }
           );
-       
-        return done(null, { 
-            id: user._id,
-            User_Name: user.User_Name,
-            Email: user.Email,
-            Display_Picture: user.Display_Picture,
-            token
-        });
+         
+          request.res.cookie("token", token, {
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            httpOnly: false,
+          });
+        return done(null, user);
     } catch (error) {
         return done(error);
     }

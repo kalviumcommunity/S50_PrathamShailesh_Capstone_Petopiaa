@@ -26,6 +26,12 @@ function NavMainpage() {
       case 2:
         navigate("/chat");
         break;
+      case 3:
+        navigate("/About");
+        break;
+      case 4:
+        navigate("/Contact");
+        break;
 
       default:
         break;
@@ -71,6 +77,14 @@ function NavMainpage() {
     logout();
     setShowLogoutPopup(false);
   };
+
+  const about=()=>{
+    navigate("/About")
+  }
+
+  const contact=()=>{
+    navigate("/Contact")
+  }
 
   return (
     <>
@@ -130,12 +144,12 @@ function NavMainpage() {
                 {showSetting && (
                   <div className="absolute right-0 mt-2 bg-white rounded-md shadow-lg w-48">
                     <div className="py-1">
-                      <a
+                      {/* <a
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         Settings
-                      </a>
+                      </a> */}
                       <a
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -191,12 +205,14 @@ function NavMainpage() {
             <a
               href="#"
               className="block text-gray-600 hover:text-gray-800 py-2"
+              onClick={about}
             >
               About
             </a>
             <a
               href="#"
               className="block text-gray-600 hover:text-gray-800 py-2"
+              onClick={contact}
             >
               Contact
             </a>
