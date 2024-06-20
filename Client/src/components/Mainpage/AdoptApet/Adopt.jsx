@@ -18,7 +18,7 @@ const PetDetailsPopup = ({ pet, onClose }) => {
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const response = await axios.get("http://localhost:3000/users", {
+        const response = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,7 +36,7 @@ const PetDetailsPopup = ({ pet, onClose }) => {
     const fetchSellerName = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/users/seller/${sellerId}`,
+          `https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users/seller/${sellerId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
