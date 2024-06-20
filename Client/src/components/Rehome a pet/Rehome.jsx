@@ -61,7 +61,7 @@ function Rehome() {
       };
 
       const response = await axios.post(
-        "http://localhost:3000/rehome",
+        "https://s50-prathamshailesh-capstone-petopiaa.onrender.com/rehome",
         formDataWithUserId,
         {
           headers: {
