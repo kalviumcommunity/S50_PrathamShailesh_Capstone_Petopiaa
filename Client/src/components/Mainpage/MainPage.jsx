@@ -51,7 +51,7 @@ const Main = ({ user }) => {
     const fetchPets = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:3000/rehome", {
+        const response = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/rehome", {
           params: { filter },
           headers: {
             Authorization: `Bearer ${token}`,

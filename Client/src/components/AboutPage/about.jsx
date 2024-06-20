@@ -5,7 +5,6 @@ function About() {
   const navigate = useNavigate();
   const contact=()=>{
     navigate("/Contact")
-
   }
   return (
     <div className="bg-pink-100 min-h-screen flex flex-col items-center justify-center p-8">

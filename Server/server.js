@@ -19,6 +19,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 connectDatabase();
+app.use(cors());
+app.use(express.json()); 
 
 app.use(session({
     secret: secret,
@@ -30,8 +32,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors());
-app.use(express.json()); 
+
 
 
 

@@ -22,6 +22,9 @@ passport.use(new GoogleStrategy({
     // console.log("hello")
     try {
         let user = await User.findOne({ google_id: profile.id });
+
+        
+
         // console.log(profile)
         if (!user) {
             user = new User({
@@ -35,7 +38,7 @@ passport.use(new GoogleStrategy({
         const token = jwt.sign(
             { userId: user._id,
                  email: user.Email }, 
-            process.env.Jwt_Secret_key, 
+            "process.env.JWT_SECRET_KEY", 
             { expiresIn: '8h' }
           );
          
