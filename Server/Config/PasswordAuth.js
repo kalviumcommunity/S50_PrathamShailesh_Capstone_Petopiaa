@@ -13,7 +13,7 @@ const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 passport.use(new GoogleStrategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    callbackURL: "https://6673f6f1ab5bad1fe07b0254--soft-pixie-683e68.netlify.app/auth/google/callback",
+    callbackURL: "https://s50-prathamshailesh-capstone-petopiaa.onrender.com/auth/google/callback",
     passReqToCallback   : true
   },
 
