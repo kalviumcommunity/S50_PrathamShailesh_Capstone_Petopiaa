@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import NavMainpage from "../Mainpage/Nav-Mainpage";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function Profile() {
   const [username, setUsername] = useState("");
@@ -9,6 +9,8 @@ function Profile() {
   const [editMode, setEditMode] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -33,14 +35,10 @@ function Profile() {
             Authorization: `Bearer ${token}`,
           },
         });
-        // console.log("Posts data response:", postsResponse.data);
         const userId = response.data._id;
-        // console.log("User ID:", userId);
-
         const userPosts = postsResponse.data.filter(
           (post) => post.userId === userId
         );
-        // console.log("User Posts:", userPosts);
         setUserPosts(userPosts);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -101,16 +99,49 @@ function Profile() {
     }
   };
 
-  const dummyPosts = [
-    { id: 1, title: "Post 1", content: "Content of Post 1" },
-    { id: 2, title: "Post 2", content: "Content of Post 2" },
-    { id: 3, title: "Post 3", content: "Content of Post 3" },
-  ];
+  const openModal = (postId) => {
+    setPostToDelete(postId);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setPostToDelete(null);
+  };
+
+  const handleDeletePost = async () => {
+    if (!postToDelete) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("User not authenticated");
+      }
+
+      await axios.delete(`http://localhost:3000/rehome/${postToDelete}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          userId: userData._id,
+        },
+      });
+
+      setUserPosts((prevPosts) =>
+        prevPosts.filter((post) => post._id !== postToDelete)
+      );
+      closeModal();
+      console.log("Post deleted successfully");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      closeModal();
+    }
+  };
 
   return (
     <>
       <NavMainpage />
-      <div className="container mx-auto px-4 py-8 ">
+      <div className="container mx-auto px-4 py-8">
         <div className="bg-blue-200 shadow-md rounded-lg p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -189,27 +220,68 @@ function Profile() {
           <div className="py-3">
             <h3 className="text-xl font-semibold mb-4">Your Posts</h3>
             <div className="grid grid-cols-3 gap-4">
-              {userPosts.map((post) => (
-                <div
-                  key={post._id}
-                  className="bg-white shadow-md rounded-lg overflow-hidden"
-                  style={{ maxWidth: "300px" }}
-                >
-                  <img
-                    src={post.image}
-                    alt={post.name}
-                    className="w-full h-40 object-cover rounded-t-lg"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2">{post.name}</h3>
-                    <p className="text-sm text-gray-600">{post.description}</p>
-                  </div>
+              {userPosts.length === 0 ? (
+                <div className="col-span-3 flex items-center justify-center h-full">
+                  <p className="text-lg text-gray-600">No posts found.</p>
                 </div>
-              ))}
+              ) : (
+                userPosts.map((post) => (
+                  <div
+                    key={post._id}
+                    className="bg-white shadow-md rounded-lg overflow-hidden"
+                    style={{ maxWidth: "300px" }}
+                  >
+                    <img
+                      src={post.image}
+                      alt={post.name}
+                      className="w-full h-40 object-cover rounded-t-lg"
+                    />
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold mb-2">
+                        {post.name}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {post.description}
+                      </p>
+                    </div>
+                    <div className="p-4 flex justify-end">
+                      <button
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                        onClick={() => openModal(post._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-semibold mb-4">Confirm Deletion</h2>
+            <p>Are you sure you want to delete this post?</p>
+            <div className="flex justify-center mt-4">
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                onClick={closeModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={handleDeletePost}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

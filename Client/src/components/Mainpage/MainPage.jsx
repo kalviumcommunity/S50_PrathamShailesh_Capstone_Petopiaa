@@ -3,9 +3,11 @@ import cat from "../../assets/cat-doodle.jpg";
 import Footer from "../landingpage/Footer";
 import PetDetailsPopup from "./AdoptApet/Adopt";
 import NavMainpage from "./Nav-Mainpage";
+import dummy from "./dummyadopt.json";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { CornerDialog } from "evergreen-ui";
+import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,10 +22,21 @@ const Main = ({ user }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [selectedPet, setSelectedPet] = useState(null);
+  const [adoptionCenters, setAdoptionCenters] = useState([]);
 
   useEffect(() => {
     const isFirstTime = localStorage.getItem("isFirstTimeUser");
-    const token = localStorage.getItem('token');
+    let token = localStorage.getItem("token");
+    if (!token) {
+      // If not found, check in cookies
+      token = Cookies.get("token");
+      if (token) {
+        // If found in cookies, set it to local storage
+        localStorage.setItem("token", token);
+      }
+    }
+
+    console.log(token);
 
     if (isFirstTime === "false") {
       setIsShown(true);
@@ -41,10 +54,10 @@ const Main = ({ user }) => {
         const response = await axios.get("http://localhost:3000/rehome", {
           params: { filter },
           headers: {
-            'Authorization': `Bearer ${token}` 
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
-        
+
         setPets(response.data);
       } catch (error) {
         console.error("Error fetching pets:", error);
@@ -53,7 +66,17 @@ const Main = ({ user }) => {
       }
     };
 
+    const fetchAdoptionCenters = async () => {
+      try {
+        // Replace with actual API call or JSON data import
+        setAdoptionCenters(dummy); // Set adoption centers from imported JSON data
+      } catch (error) {
+        console.error("Error fetching adoption centers:", error);
+      }
+    };
+
     fetchPets();
+    fetchAdoptionCenters();
   }, []);
 
   const handleFilterChange = (category) => {
@@ -146,8 +169,47 @@ const Main = ({ user }) => {
             </div>
           </section>
 
-          <section className="py-12">
+          <section className="py-12 bg-white">
             <div className="container mx-auto px-4" id="petList">
+              <h2 className="text-3xl font-semibold mb-8">Adoption Centers</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {adoptionCenters.map((center) => (
+                  <div
+                    key={center.id}
+                    className="bg-gray-200 p-4 rounded-lg shadow-md"
+                  >
+                    <img
+                      src={center.image}
+                      alt={center.name}
+                      className="w-full h-40 object-cover rounded-lg mb-4"
+                    />
+                    <h3 className="text-xl font-semibold mb-2">
+                      {center.name}
+                    </h3>
+                    <p className="text-gray-700 mb-2">
+                      Location: {center.location}
+                    </p>
+                    <p className="text-gray-700 mb-4">{center.description}</p>
+                    <a
+                      href={center.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                    >
+                      Visit Center
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-12">
+            <h2 className="text-4xl text-center font-semibold mb-8">
+              Adopt pets from other users
+            </h2>
+
+            <div className="container mx-auto px-4">
               <h2 className="text-3xl font-semibold mb-8">
                 Browse by Category
               </h2>
@@ -194,33 +256,41 @@ const Main = ({ user }) => {
           <section className="py-12">
             <div className="container mx-auto px-4">
               <h2 className="text-3xl font-semibold mb-8">Featured Pets</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {filteredPets.map((pet) => (
-                  <div
-                    key={pet._id}
-                    className="bg-white shadow-md rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src={pet.image}
-                      alt={pet.name}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">{pet.name}</h3>
-                      <p className="text-gray-700 mb-2">{pet.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xl font-bold">${pet.price}</span>
-                        <button
-                          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-                          onClick={() => handleAdoptClick(pet)}
-                        >
-                          Adopt Now
-                        </button>
+              {filteredPets.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  {filteredPets.map((pet) => (
+                    <div
+                      key={pet._id}
+                      className="bg-white shadow-md rounded-lg overflow-hidden"
+                    >
+                      <img
+                        src={pet.image}
+                        alt={pet.name}
+                        className="w-full h-48 object-cover"
+                      />
+                      <div className="p-6">
+                        <h3 className="text-xl font-semibold mb-2">
+                          {pet.name}
+                        </h3>
+                        <p className="text-gray-700 mb-2">{pet.description}</p>
+                        <div className="flex items-center justify-end">
+                          {/* <span className="text-xl font-bold">${pet.price}</span> */}
+                          <button
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                            onClick={() => handleAdoptClick(pet)}
+                          >
+                            Adopt Now
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center text-gray-500">
+                  Currently no pets are available.
+                </p>
+              )}
             </div>
           </section>
 

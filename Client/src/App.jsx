@@ -8,6 +8,8 @@ import MainPage from './components/Mainpage/MainPage';
 import Rehome from './components/RehomeApet/Rehome';
 import Profile from './components/Profile/Profile';
 import ChatBox from './components/ChatBox/ChatBox';
+import AboutPage from "./components/AboutPage/about"
+import Contact from './components/ContactUs/contact';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/Rehome" element={<Rehome />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/chat" element={<ChatBox />} />
+        <Route path="/About" element={<AboutPage />} />
+        <Route path="/Contact" element={<Contact />} />
         {/* <LandingPage/> */}
       </Routes>
     </>

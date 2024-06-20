@@ -37,7 +37,7 @@ app.use(express.json());
 
 app.use('/users',userroute)
 app.use('/rehome',authenticateToken,petroute)
-app.use("/auth",authenticateToken,authroute)
+app.use("/auth",authroute)
 app.use("/chat",authenticateToken,chat)
 
 

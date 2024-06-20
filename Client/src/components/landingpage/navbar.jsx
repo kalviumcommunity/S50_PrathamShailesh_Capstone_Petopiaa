@@ -1,7 +1,18 @@
 import React from "react";
 import logo from "../../assets/Frame_1__4_-removebg-preview.png"
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+
+  const navigate=useNavigate()
+
+  const about=()=>{
+    navigate("/about")
+  }
+  const contact=()=>{
+    navigate("/contact")
+  }
+
   return (
     <nav className="flex flex-col md:flex-row justify-between items-center p-3 md:p-5 "> 
       <div className="mb-4 md:mb-0">
@@ -11,13 +22,16 @@ function Navbar() {
         </h1> */}
       </div>
       <div className="md:space-x-10 space-x-5 text-lg md:flex">
-        <a href="#" className="text-gray-800 hover:text-gray-600">
+        <a href="#" className="text-gray-800 hover:text-gray-600"
+        >
           HOME
         </a>
-        <a href="#" className="text-gray-800 hover:text-gray-600">
+        <a href="#" className="text-gray-800 hover:text-gray-600"
+        onClick={about}>
           ABOUT
         </a>
-        <a href="#" className="text-gray-800 hover:text-gray-600">
+        <a href="#" className="text-gray-800 hover:text-gray-600"
+        onClick={contact}>
           CONTACT US
         </a>
       </div>

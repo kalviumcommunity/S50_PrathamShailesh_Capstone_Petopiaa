@@ -1,0 +1,36 @@
+[
+    {
+      "id": "1",
+      "name": "Vatsalya - Animal Care Trust",
+      "location": "Shaktinagar, Mangalore",
+      "image": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2024/01/pet-adoption-statistics.jpg",
+      "description": "A caring environment dedicated to finding loving homes for pets of all kinds.",
+      "url":"https://www.google.com/maps/place/%22Vatsalya+%22+Animal+Care+Trust,+Shaktinagar/@12.9029911,74.8770126,17z/data=!3m1!4b1!4m6!3m5!1s0x3ba359f985f04d27:0xc6fd98a5b03909f8!8m2!3d12.9029859!4d74.8795875!16s%2Fg%2F11x9x1tz3?entry=ttu"
+    },
+    {
+      "id": "2",
+      "name": "Charlie's Animal Rescue Centre",
+      "location": "Bangalore , Karnataka",
+      "image": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202201/4-happiness-pups.jpg?size=690:388",
+      "description": "Rescuing and rehabilitating pets in need, providing them with a second chance.",
+      "url":"https://www.google.com/maps/place/Charlie's+Animal+Rescue+Centre+(CARE)/@13.1097024,77.6318338,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae19b52875ba27:0xc3083634d92888fd!8m2!3d13.1096972!4d77.6344087!16s%2Fg%2F11b6c5r2vq?entry=ttu"
+    },
+    {
+      "id": "3",
+      "name": "Maruthy Dog Shelter",
+      "location": "Marathahalli rd,Bangalore",
+      "image": "https://images.deccanherald.com/deccanherald%2Fimport%2Fsites%2Fdh%2Ffiles%2Farticle_images%2F2020%2F05%2F19%2F550562-91033769-1465065152.jpg?auto=format%2Ccompress&fmt=webp&fit=max&format=webp&w=400&dpr=2.6",
+      "description": "Dedicated to providing a safe haven for dogs awaiting adoption, ensuring their well-being.",
+      "url":"https://www.google.com/maps/place/Maruthy+Dog+Shelter/@12.8964084,77.7209373,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae12b86f254b21:0x3c61ecec28b45f30!8m2!3d12.8964032!4d77.7235122!16s%2Fg%2F11c3kq72hd?entry=ttu"
+
+    },
+    {
+      "id": "4",
+      "name": "Yahshua Animal Trust",
+      "location": "Tambaram,Chennai,Tamil Nadu",
+      "image": "https://www.purina.in/sites/default/files/2020-11/Should%20I%20Get%20a%20Cat%20or%20DogTEASER.jpg",
+      "url":"https://www.google.com/maps/place/Dog+%26+Cat+Adoption+centre%2FShelter+in+Chennai-+Yahshua+Animal+Trust/@13.1092994,76.1746338,8z/data=!4m10!1m2!2m1!1schennai+pet+adoption!3m6!1s0x3a52f51ae7d57153:0xdc0eb0e12c3ac0c9!8m2!3d12.935501!4d80.1026057!15sChRjaGVubmFpIHBldCBhZG9wdGlvbloWIhRjaGVubmFpIHBldCBhZG9wdGlvbpIBDmFuaW1hbF9zaGVsdGVymgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU0yZHpVM1IyWkJFQUXgAQA!16s%2Fg%2F11c719qgqy?entry=ttu",
+      "description": "Helping pets find their forever homes through compassionate care and adoption services."
+    }
+  ]
+  
