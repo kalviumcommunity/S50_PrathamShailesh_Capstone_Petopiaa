@@ -19,7 +19,7 @@ function Profile() {
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const response = await axios.get("http://localhost:3000/users", {
+        const response = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -30,7 +30,7 @@ function Profile() {
         setEmail(response.data.Email);
         setAddress(response.data.Address || "");
 
-        const postsResponse = await axios.get("http://localhost:3000/rehome", {
+        const postsResponse = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/rehome", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -118,7 +118,7 @@ function Profile() {
         throw new Error("User not authenticated");
       }
 
-      await axios.delete(`http://localhost:3000/rehome/${postToDelete}`, {
+      await axios.delete(`https://s50-prathamshailesh-capstone-petopiaa.onrender.com/rehome/${postToDelete}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
