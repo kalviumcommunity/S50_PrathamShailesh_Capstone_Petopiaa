@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signupimg from "../../assets/signUp.png";
+import { URL } from "../Constant/api";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -40,7 +41,9 @@ function SignUp() {
 
     try {
       const response = await axios.post(
-          "https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users/signup",
+
+          `${URL}/users/signup`,
+
           formData
       );
   
@@ -64,7 +67,7 @@ function SignUp() {
   const googleclck = () => {
     setIsGoogleSigning(true);
  
-    window.location.href = "http://localhost:3000/auth/google";
+    window.location.href = `${URL}/auth/google`;
   };
 
   return (

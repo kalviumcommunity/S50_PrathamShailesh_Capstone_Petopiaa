@@ -52,6 +52,23 @@ router.get("/", async (req, res, next) => {
 });
 
 
+router.get('/species-aggregate', async (req, res) => {
+  try {
+    const speciesData = await petModel.aggregate([
+      { 
+        $group: { 
+          _id: "$species", 
+          count: { $sum: 1 } 
+        } 
+      }
+    ]);
+    res.json(speciesData);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+
 router.delete("/:petId", async (req, res, next) => {
   try {
     const { petId } = req.params;

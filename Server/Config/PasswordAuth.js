@@ -22,6 +22,9 @@ passport.use(new GoogleStrategy({
     // console.log("hello")
     try {
         let user = await User.findOne({ google_id: profile.id });
+
+        
+
         // console.log(profile)
         if (!user) {
             user = new User({

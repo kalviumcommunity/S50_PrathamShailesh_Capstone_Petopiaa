@@ -2,7 +2,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import axios from "axios";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { URL } from "../Constant/api";
 function Rehome() {
   const [formData, setFormData] = useState({
     name: "",
@@ -45,7 +45,7 @@ function Rehome() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/rehome",
+        `${URL}/rehome`,
         formData
       );
       console.log("Form submitted successfully:", response.data);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { URL } from "@/components/Constant/api";
 
 const PetDetailsPopup = ({ pet, onClose }) => {
   const navigate = useNavigate();
@@ -18,7 +18,9 @@ const PetDetailsPopup = ({ pet, onClose }) => {
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const response = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users", {
+
+        const response = await axios.get(`${URL}/users`, {
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,7 +38,9 @@ const PetDetailsPopup = ({ pet, onClose }) => {
     const fetchSellerName = async () => {
       try {
         const response = await axios.get(
-          `https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users/seller/${sellerId}`,
+
+          `${URL}/users/seller/${sellerId}`,
+
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -56,7 +60,7 @@ const PetDetailsPopup = ({ pet, onClose }) => {
     if (user !== sellerName) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/chat",
+          `${URL}/chat`,
           {
             participants: [user, sellerName],
             messages: [],

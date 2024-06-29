@@ -3,7 +3,7 @@ import axios from "axios";
 import { FilePicker } from "evergreen-ui";
 import React, { useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { URL } from "../Constant/api";
 function Rehome() {
   const [formData, setFormData] = useState({
     name: "",
@@ -61,7 +61,7 @@ function Rehome() {
       };
 
       const response = await axios.post(
-        "https://s50-prathamshailesh-capstone-petopiaa.onrender.com/rehome",
+        `${URL}/rehome`,
         formDataWithUserId,
         {
           headers: {

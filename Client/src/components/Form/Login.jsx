@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import signupimg from '../../assets/signUp.png';
+import { URL } from '../Constant/api';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -28,7 +29,9 @@ function Login() {
     
     try {
       const response = await axios.post(
-        "https://s50-prathamshailesh-capstone-petopiaa.onrender.com/users/login",
+
+        `${URL}/users/login`,
+
         formData
       );
   
