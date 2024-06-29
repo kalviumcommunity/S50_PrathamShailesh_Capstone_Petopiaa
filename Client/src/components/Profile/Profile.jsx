@@ -20,6 +20,7 @@ function Profile() {
           throw new Error("User not authenticated");
         }
         const response = await axios.get(`${URL}/users`, {
+n
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,6 +32,7 @@ function Profile() {
         setAddress(response.data.Address || "");
 
         const postsResponse = await axios.get(`${URL}/rehome`, {
+
           headers: {
             Authorization: `Bearer ${token}`,
           },

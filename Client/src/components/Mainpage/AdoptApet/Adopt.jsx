@@ -18,7 +18,9 @@ const PetDetailsPopup = ({ pet, onClose }) => {
         if (!token) {
           throw new Error("User not authenticated");
         }
+
         const response = await axios.get(`${URL}/users`, {
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,7 +38,9 @@ const PetDetailsPopup = ({ pet, onClose }) => {
     const fetchSellerName = async () => {
       try {
         const response = await axios.get(
+
           `${URL}/users/seller/${sellerId}`,
+
           {
             headers: {
               Authorization: `Bearer ${token}`,

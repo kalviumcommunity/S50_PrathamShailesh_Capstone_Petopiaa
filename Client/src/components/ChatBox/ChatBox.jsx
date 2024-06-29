@@ -30,7 +30,9 @@ function ChatBox() {
   useEffect(() => {
     const fetchChatMessages = async () => {
       try {
+
         const response = await axios.get(`${URL}/chat`,{
+
           headers:{
             'Authorization':`Bearer ${token}`
           }

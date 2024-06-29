@@ -41,7 +41,9 @@ function SignUp() {
 
     try {
       const response = await axios.post(
+
           `${URL}/users/signup`,
+
           formData
       );
   
