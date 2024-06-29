@@ -12,7 +12,7 @@ function NavMainpage() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const navigate = useNavigate();
 
-  const tabs = ["Home", "Rehome a Pet", "Chat", "About", "Contact"];
+  const tabs = ["Home", "Rehome a Pet", "Chat", "About", "Contact","Chart"];
 
   const handleTabSelect = (index) => {
     setSelectedIndex(index);
@@ -31,6 +31,9 @@ function NavMainpage() {
         break;
       case 4:
         navigate("/Contact");
+        break;
+      case 5:
+        navigate("/Chart");
         break;
 
       default:
@@ -215,6 +218,13 @@ function NavMainpage() {
               onClick={contact}
             >
               Contact
+            </a>
+            <a
+              href="#"
+              className="block text-gray-600 hover:text-gray-800 py-2"
+              onClick={contact}
+            >
+              chart
             </a>
           </div>
         </div>

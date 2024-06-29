@@ -6,6 +6,8 @@ import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { FiSearch, FiSend } from "react-icons/fi";
 import io from "socket.io-client";
 import { useLocation } from "react-router-dom"; 
+import { Import } from "lucide-react";
+import { URL } from "../Constant/api";
 
 function ChatBox() {
   const innerDivRef = useRef(null);
@@ -28,7 +30,7 @@ function ChatBox() {
   useEffect(() => {
     const fetchChatMessages = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/chat",{
+        const response = await axios.get(`${URL}/chat`,{
           headers:{
             'Authorization':`Bearer ${token}`
           }
@@ -88,7 +90,7 @@ function ChatBox() {
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const response = await axios.get("http://localhost:3000/users", {
+        const response = await axios.get(`${URL}/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -149,7 +151,7 @@ function ChatBox() {
       socket.emit("sendMessage", newMessage);
 
       try {
-        await axios.put("http://localhost:3000/chat", {
+        await axios.put(`${URL}/chat`, {
           participants: [currentUser, selectedChat],
           messages: updatedConversations.find(
             (conv) =>

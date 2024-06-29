@@ -9,7 +9,9 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ message: 'No token provided' });
   }
 
-  jwt.verify(token, process.env.Jwt_Secret_Key, (err, user) => {
+  try{
+
+  jwt.verify(token, "process.env.JWT_SECRET_KEY", (err, user) => {
     if (err) {
       // console.error('Token verification failed:', err);
       return res.status(403).json({ message: 'Token verification failed' });
@@ -17,6 +19,9 @@ const authenticateToken = (req, res, next) => {
     req.user = user;
     next();
   });
+  } catch(err){
+    return res.status(400).json(err);
+  }
 };
 
 module.exports = authenticateToken;

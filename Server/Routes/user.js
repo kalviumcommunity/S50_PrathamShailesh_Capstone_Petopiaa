@@ -41,12 +41,12 @@ router.post('/signup', async (req, res, next) => {
         const token = jwt.sign({ userId: newUser._id,
              username: newUser.User_Name,
               email: newUser.Email }, 
-             process.env.JWT_SECRET_KEY, { expiresIn: '8h' });
+             "process.env.JWT_SECRET_KEY", { expiresIn: '8h' });
 
         res.status(201).json({ user: newUser, token });
     } catch (error) {
         console.error("Error creating user:", error);
-        next(error);
+        return res.status(500).json(err);
     }
 });
 
@@ -58,6 +58,7 @@ router.post('/login', async (req, res, next) => {
     }
 
     const { email, password } = req.body;
+    console.log(email)
 
     try {
         const user = await userModel.findOne({ Email: email });
@@ -76,7 +77,7 @@ router.post('/login', async (req, res, next) => {
 
         res.json({ user, token });
     } catch (error) {
-        next(error);
+        return res.status(500).json(err);
     }
 });
 
@@ -90,7 +91,7 @@ router.get("/", authenticateToken, async (req, res, next) => {
 
         res.json(user);
     } catch (error) {
-        next(error);
+        return res.status(500).json(err);
     }
 });
 
@@ -104,7 +105,7 @@ router.get("/seller/:id", authenticateToken, async (req, res, next) => {
 
         res.json(user);
     } catch (error) {
-        next(error);
+        return res.status(500).json(err);
     }
 });
 
@@ -139,7 +140,7 @@ router.put("/", authenticateToken, async (req, res, next) => {
 
         res.json(user);
     } catch (error) {
-        next(error);
+        return res.status(500).json(err);
     }
 });
 

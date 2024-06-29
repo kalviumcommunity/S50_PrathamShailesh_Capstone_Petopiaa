@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile';
 import ChatBox from './components/ChatBox/ChatBox';
 import AboutPage from "./components/AboutPage/about"
 import Contact from './components/ContactUs/contact';
+import Chart from './components/Chart/Chart';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/chat" element={<ChatBox />} />
         <Route path="/About" element={<AboutPage />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/Chart" element={<Chart />} />
         {/* <LandingPage/> */}
       </Routes>
     </>

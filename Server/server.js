@@ -37,9 +37,9 @@ app.use(passport.session());
 
 
 app.use('/users',userroute)
-app.use('/rehome',authenticateToken,petroute)
+app.use('/rehome',petroute)
 app.use("/auth",authroute)
-app.use("/chat",authenticateToken,chat)
+app.use("/chat",chat)
 
 
 app.listen(port, () => {

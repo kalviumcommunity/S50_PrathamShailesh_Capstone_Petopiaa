@@ -1,7 +1,7 @@
 import NavMainpage from "../Mainpage/Nav-Mainpage";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-
+import { URL } from "../Constant/api";
 function Profile() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ function Profile() {
         if (!token) {
           throw new Error("User not authenticated");
         }
-        const response = await axios.get("http://localhost:3000/users", {
+        const response = await axios.get(`${URL}/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -30,7 +30,7 @@ function Profile() {
         setEmail(response.data.Email);
         setAddress(response.data.Address || "");
 
-        const postsResponse = await axios.get("http://localhost:3000/rehome", {
+        const postsResponse = await axios.get(`${URL}/rehome`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -82,7 +82,7 @@ function Profile() {
       }
 
       const response = await axios.put(
-        "http://localhost:3000/users",
+        `${URL}/users`,
         updatedUserData,
         {
           headers: {
@@ -118,7 +118,7 @@ function Profile() {
         throw new Error("User not authenticated");
       }
 
-      await axios.delete(`http://localhost:3000/rehome/${postToDelete}`, {
+      await axios.delete(`${URL}/rehome/${postToDelete}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

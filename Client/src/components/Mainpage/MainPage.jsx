@@ -10,6 +10,7 @@ import { CornerDialog } from "evergreen-ui";
 import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../Constant/api";
 
 const Main = ({ user }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -51,7 +52,7 @@ const Main = ({ user }) => {
     const fetchPets = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("https://s50-prathamshailesh-capstone-petopiaa.onrender.com/rehome", {
+        const response = await axios.get(`${URL}/rehome`, {
           params: { filter },
           headers: {
             Authorization: `Bearer ${token}`,
