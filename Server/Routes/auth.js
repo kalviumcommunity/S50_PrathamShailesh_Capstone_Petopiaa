@@ -15,7 +15,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "https://6673f6f1ab5bad1fe07b0254--soft-pixie-683e68.netlify.app/MainPage",
+    successRedirect: "http://localhost:5173//MainPage",
     failureRedirect: "/google/failure",
   })
 );
