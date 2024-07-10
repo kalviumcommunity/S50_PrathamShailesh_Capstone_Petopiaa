@@ -19,23 +19,43 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 connectDatabase();
+// const corsOptions = {
+//   origin: 'https://pedopia.netlify.app',
+//   optionsSuccessStatus: 200,
+//   credentials: true // Allow credentials
+// };
+
+// app.use(cors(corsOptions));
+// app.options('*', cors(corsOptions));
+
+// app.use(express.json()); 
+
+// app.use(session({
+//     secret: secret,
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie:{secure :false}
+//   }));
 const corsOptions = {
-  origin: 'https://pedopia.netlify.app',
+  origin: 'https://pedopia.netlify.app', // Your Netlify frontend URL
   optionsSuccessStatus: 200,
-  credentials: true // Allow credentials
+  credentials: true // Allow credentials (cookies, authorization headers, etc.)
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions)); // Pre-flight requests handling
 
-app.use(express.json()); 
+app.use(express.json());
 
 app.use(session({
-    secret: secret,
-    resave: true,
-    saveUninitialized: true,
-    cookie:{secure :false}
-  }));
+  secret: secret, // Ensure you replace 'your_secret_key' with your actual secret
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    secure: false, // Set to true in production to ensure cookies are sent over HTTPS
+    maxAge: 7 * 24 * 60 * 60 * 1000 // Cookie expiry time: 7 days
+  }
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
