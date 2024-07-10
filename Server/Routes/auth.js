@@ -43,7 +43,7 @@ router.get(
         await user.save();
       }
 
-      res.redirect('/profile');
+      res.redirect('/');
     } catch (error) {
       console.error("Error handling Google authentication callback:", error);
       res.status(500).send("Internal server error");
