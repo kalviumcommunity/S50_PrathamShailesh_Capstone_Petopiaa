@@ -21,10 +21,13 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 connectDatabase();
 const corsOptions = {
   origin: 'https://pedopia.netlify.app',
-  optionsSuccessStatus: 200 
+  optionsSuccessStatus: 200,
+  credentials: true // Allow credentials
 };
 
+app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
 app.use(express.json()); 
 
 app.use(session({
