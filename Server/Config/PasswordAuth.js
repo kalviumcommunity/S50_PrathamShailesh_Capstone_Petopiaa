@@ -43,10 +43,12 @@ passport.use(new GoogleStrategy({
             { expiresIn: '8h' }
           );
          
-          request.res.cookie("token", token, {
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            httpOnly: false,
-          });
+         request.res.cookie("token", token, {
+              maxAge: 7 * 24 * 60 * 60 * 1000,
+              httpOnly: true,  // Set to true for better security
+              secure: true,    // Ensure the cookie is sent only over HTTPS
+              sameSite: 'None' // Allow cross-site cookies
+        });
         return done(null, user);
     } catch (error) {
         return done(error);
