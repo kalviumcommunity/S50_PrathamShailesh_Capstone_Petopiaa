@@ -23,6 +23,7 @@ app.use(
   cors({
     origin:"https://pedopia.netlify.app/",
     credentials: true,
+    optionSuccessStatus:200
   })
 );
 app.use(express.json()); 
