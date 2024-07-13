@@ -42,6 +42,8 @@ passport.use(new GoogleStrategy({
             "process.env.JWT_SECRET_KEY", 
             { expiresIn: '8h' }
           );
+
+        console.log('Generated Token:', token);
          
          request.res.cookie("token", token, {
               maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -49,6 +51,9 @@ passport.use(new GoogleStrategy({
               secure: true,    // Ensure the cookie is sent only over HTTPS
               sameSite: 'None' // Allow cross-site cookies
         });
+
+        console.log('Cookie Set:', request.res.getHeader('Set-Cookie'));
+        
         return done(null, user);
     } catch (error) {
         return done(error);
