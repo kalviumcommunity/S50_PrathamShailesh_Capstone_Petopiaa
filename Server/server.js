@@ -52,8 +52,9 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: {
-    secure: false, // Set to true in production to ensure cookies are sent over HTTPS
-    maxAge: 7 * 24 * 60 * 60 * 1000 // Cookie expiry time: 7 days
+    secure: true, // Set to true in production to ensure cookies are sent over HTTPS
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    sameSite :'None'
   }
 }));
 
