@@ -10,7 +10,7 @@ const server = createServer(app);
 
 app.use(
   cors({
-    origin: "'https://pedopia.netlify.app",
+    origin: "https://pedopia.netlify.app",
     methods: ["GET", "POST"],
     credentials: true,
   })
