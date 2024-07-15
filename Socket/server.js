@@ -18,7 +18,7 @@ app.use(
 
 const io = new Server(server, {
   cors: {
-    origin: "'https://pedopia.netlify.app",
+    origin: "https://pedopia.netlify.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
