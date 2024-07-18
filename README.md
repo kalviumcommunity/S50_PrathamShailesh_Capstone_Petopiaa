@@ -1,6 +1,6 @@
 # Project Name: PETOPIA
 
-##Frontend deployed link :- [PETOPIA](https://profound-cajeta-01bd6a.netlify.app/)
+##Frontend deployed link :- [PETOPIA](https://pedopia.netlify.app/)
 ## Problem Statement
 Many pet owners struggle to find suitable homes for their pets when they are no longer able to care for them due to various reasons such as moving to a new location, financial difficulties, or changes in lifestyle. This often leads to pets being abandoned or surrendered to overcrowded animal shelters, where they may face uncertain futures or even euthanasia due to limited resources and space.
 Many pets are sold for the people who don't want to buy them and these pets end up treated badly.
