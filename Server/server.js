@@ -40,8 +40,8 @@ const corsOptions = {
   credentials: true // Allow credentials (cookies, authorization headers, etc.)
 };
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Pre-flight requests handling
+app.use(cors());
+// app.options('*', cors(corsOptions)); // Pre-flight requests handling
 
 app.use(express.json());
 
