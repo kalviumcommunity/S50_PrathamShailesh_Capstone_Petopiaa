@@ -49,8 +49,7 @@ passport.use(new GoogleStrategy({
               maxAge: 7 * 24 * 60 * 60 * 1000,
               httpOnly: false,  
               secure: false,  
-              path: '/',
-              domain: 'pedopia.netlify.app'
+              path: '/'
         });
 
         console.log('Cookie Set:', request.res.getHeader('Set-Cookie'));
