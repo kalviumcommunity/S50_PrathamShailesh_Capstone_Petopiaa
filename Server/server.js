@@ -37,8 +37,6 @@ connectDatabase();
 //     cookie:{secure :false}
 //   }));
 const corsOptions = {
-  origin: 'https://pedopia.netlify.app', // Your Netlify frontend URL
-  optionsSuccessStatus: 200,
   credentials: true // Allow credentials (cookies, authorization headers, etc.)
 };
 
