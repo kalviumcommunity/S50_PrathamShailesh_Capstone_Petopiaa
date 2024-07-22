@@ -50,8 +50,7 @@ passport.use(new GoogleStrategy({
               httpOnly: false,  
               secure: true,  
               path: '/',
-              sameSite: 'none',
-              domain:'pedopia.netlify.app'
+              sameSite: 'none'
         });
 
         console.log('Cookie Set:', request.res.getHeader('Set-Cookie'));
