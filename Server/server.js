@@ -19,47 +19,15 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 connectDatabase();
-// const corsOptions = {
-//   origin: 'https://pedopia.netlify.app',
-//   optionsSuccessStatus: 200,
-//   credentials: true // Allow credentials
-// };
-
-// app.use(cors(corsOptions));
-// app.options('*', cors(corsOptions));
-
-// app.use(express.json()); 
-
-// app.use(session({
-//     secret: secret,
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie:{secure :false}
-//   }));
-// const corsOptions = {
-//   credentials: true // Allow credentials (cookies, authorization headers, etc.)
-// };
-
-const allowedOrigins = ['https://pedopia.netlify.app', 'http://localhost:3000', 'https://anotherdomain.com'];
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
+  origin: 'https://pedopia.netlify.app', // Your Netlify frontend URL
+  optionsSuccessStatus: 200,
+  credentials: true // Allow credentials (cookies, authorization headers, etc.)
 };
-
 app.use(cors(corsOptions));
-// app.options('*', cors(corsOptions)); // Pre-flight requests handling
-
+app.options('*', cors(corsOptions)); // Pre-flight requests handling
 app.use(express.json());
-
 app.use(session({
   secret: secret, // Ensure you replace 'your_secret_key' with your actual secret
   resave: true,
