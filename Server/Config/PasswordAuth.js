@@ -45,13 +45,14 @@ passport.use(new GoogleStrategy({
 
         console.log('Generated Token:', token);
          
-         request.res.cookie("token", token, {
-              maxAge: 7 * 24 * 60 * 60 * 1000,
-              httpOnly: false,  
-              secure: false,  
-              path: '/',
-              sameSite: 'None'
+        request.res.cookie("token", token, {
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            httpOnly: true,  
+            secure: true,  
+            path: '/',
+            sameSite: 'None'
         });
+
 
         console.log('Cookie Set:', request.res.getHeader('Set-Cookie'));
         
