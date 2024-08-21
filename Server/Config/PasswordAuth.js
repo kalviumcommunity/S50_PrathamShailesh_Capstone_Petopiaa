@@ -50,7 +50,7 @@ passport.use(new GoogleStrategy({
               httpOnly: false,  
               secure: false,  
               path: '/',
-              sameSite: 'lax'
+              sameSite: 'None'
         });
 
         console.log('Cookie Set:', request.res.getHeader('Set-Cookie'));
